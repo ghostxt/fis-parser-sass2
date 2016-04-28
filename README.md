@@ -1,60 +1,14 @@
-# fis-parser-sass2 ![NPM version](https://badge.fury.io/js/fis-parser-sass2.png)
+# fis sass parser
 
-[![NPM Download](https://nodei.co/npm-dl/fis-parser-sass2.png?months=1)](https://www.npmjs.org/package/fis-parser-sass2)
+基于https://github.com/lwdgit/fis-parser-sass2修改。
 
-A parser plugin for fis to compile sass file.
-
-（基于node-sass的fis插件，支持expanded,及预定义变量。本插件基于fis官方插件修改，不过依赖库由```fis-sass```更改为```node-sass```）
-
-## install
-
-    $ npm install -g fis-parser-sass2
-
-```javascript
-//fis-conf.js
-
-fis.config.set('modules.parser.scss', 'sass2');
-fis.config.set('settings.parser.sass2.define', {
-            'enable': true,
-            '$bgcolor': '#d8222d',
-            'color': 'black'
-        });
-        
-//你可以通过设置该属性来控制sass文件里的的变量
-
-fis.config.set('settings.parser.sass2.outputStyle', 'expanded');
-//the default is expanded，默认为expanded,你可以手动设置其他属性
-
-fis.config.set('settings.parser.sass2.sourceMap', false);
-//use sourcemap or not, default is true，是否启用sourceMap,默认为开启
-
-fis.config.set('roadmap.ext.scss', 'css');
-
-```
+可以通过引入文件的方式引入sass变量。
 
 ```javascript
 //fis3-conf.js
-fis.match('**.scss', {
+fis.match('**/*.scss', {
+    rExt: '.css',
     parser: fis.plugin('sass2', {
-        define: {
-            'enable': true,
-            '$bgcolor': '#d8222d',
-            '$color': 'black'
-        }
-    }),
-    rExt: 'css'
-})
-```
-
-```scss
-//example a.scss
-@if ($enable) {
-    body {
-        background: $bgcolor;
-        color: $color;
-    }
-}
-```
-
-    $ fis release -d ./output
-
+        'import': 'static/css/variables.scss'
+    })
+});

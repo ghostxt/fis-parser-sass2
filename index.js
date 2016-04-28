@@ -10,6 +10,7 @@
 var path = require('path');
 var sass = require('node-sass');
 var util = require('util');
+var fs = require('fs');
 var root;
 
 function resolve_and_load(filename, dir) {
@@ -99,6 +100,13 @@ function fixImport(content) {
     });
 }
 
+function handlerImport(url) {
+    console.log(root, url)
+    var ret = fs.readFileSync(url, 'utf8');
+    return {
+        scss: ret
+    }
+}
 function handlerDefine(conf) {
     var ret = '';
     var line = 0;//记录添加了多少行
@@ -147,9 +155,11 @@ module.exports = function(content, file, conf) {
     });
 
     opts.file = file.origin;
+    var scssImport = handlerImport(opts.import);
     var scssDefine = handlerDefine(opts.define);
-    opts.data = scssDefine.scss + content;
-
+    content = scssImport.scss + content;
+    content = scssDefine.scss + content;
+    opts.data = content;
     var includePaths = opts.includePaths;
     var sources = [file.subpath];
     opts.importer = function(url, prev, done) {
