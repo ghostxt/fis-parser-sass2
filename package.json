@@ -14,13 +14,15 @@
     "node-sass": "^3.3.2"
   },
   "devDependencies": {},
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ghostxt/fis-parser-sass2.git"
   },
   "author": "tongxt",
   "license": "MIT",
-  "homepage": "https://github.com/ghostxt/fis-parser-sass2"
+  "homepage": "https://github.com/ghostxt/fis-parser-sass2",
+  "bugs": {
+    "url": "https://github.com/ghostxt/fis-parser-sass2/issues"
+  }
 }
